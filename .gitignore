@@ -6,4 +6,4 @@ docs.md
 .env
 .env.production
 .env.local
-package.lock.json
+package-lock.json
