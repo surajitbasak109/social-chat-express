@@ -9,14 +9,17 @@ require('dotenv').config();
 import { RestRouter } from './api';
 import { connect } from './config/db';
 
+// create express instance
 const app = express();
+
+// define port
 const PORT = process.env.PORT || 3000;
 
 // connect database
+
 connect();
 
-console.log(process.env.NODE_ENV);
-
+// log every request
 if (process.env.NODE_ENV === 'development') {
   app.use(logger('dev'));
 }
@@ -30,6 +33,7 @@ app.use(express.json());
 // use api router
 app.use('/api', RestRouter);
 
+// middleware for invalid route
 app.use((req, res, next) => {
   const error = new Error('Not found');
   error.message = 'Invalid route';
@@ -46,6 +50,7 @@ app.use((error, req, res, next) => {
   });
 });
 
+// start the server
 app.listen(PORT, () => {
   console.log(`Server is running at PORT http://localhost:${PORT}`);
 });
