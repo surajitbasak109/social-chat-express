@@ -1,6 +1,7 @@
 // import third party pacakges
 import express from 'express';
 import logger from 'morgan';
+import swaggerUi from 'swagger-ui-express';
 
 // enable dotenv
 require('dotenv').config();
@@ -32,6 +33,9 @@ app.use(express.json());
 
 // use api router
 app.use('/api', RestRouter);
+app.use('api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+  explorer: true
+}));
 
 // middleware for invalid route
 app.use((req, res, next) => {

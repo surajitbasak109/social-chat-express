@@ -343,3 +343,6 @@ Refer [this link](https://docs.mongodb.com/manual/tutorial/enable-authentication
 MONGO_DB=mongodb://<username>:<password>@localhost:27017/databasename?authSource=admin&w=majority
 ```
 
+### Is there any pagination plugin for mongoose?
+
+Yes it has. You can download the [`mongoose-paginate`](https://www.npmjs.com/package/mongoose-paginate) plugin.
