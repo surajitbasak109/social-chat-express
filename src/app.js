@@ -3,6 +3,7 @@ import express from 'express';
 import logger from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
+import Passport from 'passport';
 
 // enable dotenv
 dotenv.config();
@@ -11,6 +12,7 @@ dotenv.config();
 import { RestRouter } from './api/index.js';
 import { connect } from './config/db.js';
 import swaggerDocument from './config/swagger.js';
+import { configJWTStrategy } from "./api/middlewares/passport-jwt.js";
 
 // create express instance
 const app = express();
@@ -25,6 +27,10 @@ connect();
 if (process.env.NODE_ENV === 'development') {
   app.use(logger('dev'));
 }
+
+// use passport initialize middleware
+app.use(Passport.initialize());
+configJWTStrategy();
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));

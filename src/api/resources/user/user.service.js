@@ -11,7 +11,8 @@ export default {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
       email: Joi.string().email().required(),
-      password: Joi.string().required()
+      password: Joi.string().required(),
+      role: Joi.number().integer(),
     });
     const { value, error } = schema.validate(body);
 
@@ -22,12 +23,12 @@ export default {
     return { value };
   },
   comparePassword(plainText, encryptedPassword) {
-     return bcrypt.compareSync(plainText, encryptedPassword);
+    return bcrypt.compareSync(plainText, encryptedPassword);
   },
   validateLogin(body) {
     const schema = Joi.object({
       email: Joi.string().email().required(),
-      password: Joi.string().required()
+      password: Joi.string().required(),
     });
     const { value, error } = schema.validate(body);
 
@@ -36,5 +37,5 @@ export default {
     }
 
     return { value };
-  }
-}
+  },
+};
