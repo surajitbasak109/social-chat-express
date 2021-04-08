@@ -7,4 +7,4 @@ const standardPolicy = [passport.authenticate('jwt', { session: false })];
 
 export const categoryRouter = express.Router();
 
-categoryRouter.route('/').post(standardPolicy, categoryController.create);
+categoryRouter.route('/').post(standardPolicy, categoryController.create).get(standardPolicy, categoryController.findAll);

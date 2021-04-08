@@ -18,4 +18,15 @@ export default {
       res.status(500).json(err);
     }
   },
+  async findAll(req, res) {
+    try {
+      const categories = await Category.find().populate('tweets', 'body').populate('user', 'firstName lastName');
+
+      res.json(categories);
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).json(err);
+    }
+  }
 };
