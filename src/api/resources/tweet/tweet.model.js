@@ -8,6 +8,11 @@ const tweetSchema = new Schema({
     type: String,
     required: [true, 'Tweet must have a body'],
   },
+  artist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
 });
 
 tweetSchema.plugin(mongoosePaginate);

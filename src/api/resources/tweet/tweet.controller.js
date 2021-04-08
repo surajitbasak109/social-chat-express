@@ -13,7 +13,7 @@ export default {
         return res.status(400).json(error);
       }
 
-      const tweet = await Tweet.create(value);
+      const tweet = await Tweet.create(Object.assign({}, value, { artist: req.user._id }));
       return res.json(tweet);
     } catch (err) {
       console.log(err);
