@@ -26,6 +26,10 @@ export default {
       const options = {
         page: parseInt(page, 10) || 1,
         limit: parseInt(perPage, 10) || 10,
+        populate: {
+          path: 'artist',
+          select: 'firstName lastName'
+        }
       };
       const tweets = await Tweet.paginate({}, options);
 
@@ -38,7 +42,7 @@ export default {
   async findOne(req, res) {
     try {
       let { id } = req.params;
-      const tweet = await Tweet.findById(id);
+      const tweet = await Tweet.findById(id).populate('artist', 'firstName lastName');
       if (!tweet) {
         return res.status(404).json({ error: 'Could not find tweet' });
       }
