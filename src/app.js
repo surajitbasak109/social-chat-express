@@ -2,13 +2,15 @@
 import express from 'express';
 import logger from 'morgan';
 import swaggerUi from 'swagger-ui-express';
+import dotenv from 'dotenv';
 
 // enable dotenv
-require('dotenv').config();
+dotenv.config();
 
 // import own modules/components
-import { RestRouter } from './api';
-import { connect } from './config/db';
+import { RestRouter } from './api/index.js';
+import { connect } from './config/db.js';
+import swaggerDocument from './config/swagger.js';
 
 // create express instance
 const app = express();
@@ -17,7 +19,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // connect database
-
 connect();
 
 // log every request
@@ -33,9 +34,13 @@ app.use(express.json());
 
 // use api router
 app.use('/api', RestRouter);
-app.use('api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
-  explorer: true
-}));
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    explorer: true,
+  })
+);
 
 // middleware for invalid route
 app.use((req, res, next) => {

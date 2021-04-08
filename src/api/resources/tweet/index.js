@@ -1,1 +1,1 @@
-export { tweetRouter } from './tweet.router';
+export { tweetRouter } from './tweet.router.js';

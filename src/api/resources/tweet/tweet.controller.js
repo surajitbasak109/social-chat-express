@@ -1,5 +1,5 @@
-import Joi, { expression } from 'joi';
-import Tweet from './tweet.model';
+import Joi from 'joi';
+import Tweet from './tweet.model.js';
 
 export default {
   async create(req, res) {
